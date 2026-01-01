@@ -1,0 +1,760 @@
+html { scroll-behavior: smooth; }
+
+/* --- CORE SETTINGS --- */
+:root {
+    --bg-body: #FDFCF8;
+    --text-dark: #1C1C1C;
+    --gold: #B88A44;
+    --gold-gradient: linear-gradient(135deg, #C5A086 0%, #B88A44 100%);
+    --shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body { 
+    background: var(--bg-body); 
+    color: var(--text-dark); 
+    font-family: 'Montserrat', sans-serif; 
+    padding-top: 0px; 
+    -webkit-font-smoothing: antialiased; 
+}
+
+/* Typography */
+h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+p { line-height: 1.45; }
+
+/* Images & Buttons */
+img { width: 100%; display: block; object-fit: cover; }
+button { border: none; outline: none; cursor: pointer; background: none; }
+a { text-decoration: none; }
+
+/* --- BURGER MENU --- */
+.burger {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 32px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.burger span {
+    height: 2px;
+    width: 100%;
+    background: #333; /* Dark for visibility */
+    transition: 0.4s;
+}
+
+.burger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.burger.active span:nth-child(2) { transform: rotate(-45deg) translate(6px, -6px); }
+
+/* --- MENU OVERLAY --- */
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s;
+    z-index: 1000;
+}
+
+.menu-overlay.active { opacity: 1; visibility: visible; }
+
+.menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+}
+
+.menu-nav a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.menu-nav a:hover { color: var(--gold); }
+
+/* --- HERO SECTION --- */
+.hero-new {
+    position: relative;
+    height: 100vh;
+    background: url("../src/hero2.webp") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    color: #fff;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-inner { position: relative; max-width: 650px; z-index: 2; }
+
+.hero-tag {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+}
+
+.hero-new h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 68px;
+    line-height: 1.05;
+    margin-bottom: 24px;
+}
+
+.hero-new p {
+    font-size: 18px;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 40px;
+}
+
+.hero-actions { display: flex; gap: 20px; }
+
+.btn-primary {
+    padding: 14px 32px;
+    background: #fff;
+    color: #111;
+    font-weight: 600;
+}
+
+.btn-outline {
+    padding: 14px 32px;
+    border: 1px solid #fff;
+    color: #fff;
+    font-weight: 500;
+}
+
+/* --- ABOUT SECTION --- */
+.about-imago { padding: 80px 5%; background: #fff; }
+
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.about-left { flex: 2; min-width: 320px; }
+.about-right { flex: 1; display: flex; justify-content: flex-end; min-width: 200px; }
+.about-logo-right { width: 373px; height: auto; }
+
+.about-title {
+    font-size: 44px;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    color: #111;
+}
+
+.about-text { font-size: 18px; line-height: 1.7; color: #555; margin-bottom: 20px; }
+
+.about-features {
+    list-style: none;
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+}
+
+.about-features li::before { content: "⭐"; margin-right: 8px; color: var(--gold); }
+
+/* --- SERVICES PREVIEW (One Row Layout) --- */
+.services-preview {
+    padding: 70px 2%; /* Меньше отступы по бокам, чтобы влезло */
+    background: var(--bg-body);
+    text-align: center;
+}
+
+.services-title {
+    font-size: 3rem;
+    margin-bottom: 50px;
+    color: var(--text-dark);
+}
+
+.services-grid {
+    display: grid;
+    /* ГЛАВНОЕ: Ровно 5 колонок в ряд */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 15px; /* Небольшой зазор, чтобы влезли плотнее */
+    max-width: 1600px; /* Разрешаем растягиваться шире */
+    margin: 0 auto;
+}
+
+.service-tile {
+    position: relative;
+    display: block;
+    height: 350px; /* Чуть компактнее по высоте */
+    overflow: hidden;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+/* Картинка */
+.service-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Затемнение снизу */
+.service-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 45%);
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+/* Название услуги */
+.service-name {
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; /* Шрифт чуть меньше, чтобы длинные слова влезали */
+    font-weight: 500;
+    z-index: 2;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    transition: bottom 0.3s ease;
+}
+
+/* Эффекты при наведении */
+.service-tile:hover img {
+    transform: scale(1.1);
+}
+
+.service-tile:hover .service-name {
+    bottom: 35px;
+    color: var(--gold);
+}
+
+/* --- АДАПТИВ ДЛЯ ТЕЛЕФОНОВ --- 
+   На телефоне 5 колонок будут слишком узкими, 
+   поэтому там разрешаем перенос (или скролл) */
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+/* --- NAV SCROLLER --- */
+.nav-scroller {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 900;
+    padding: 15px 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.02);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #888;
+    padding: 10px 20px;
+    border-bottom: 2px solid transparent;
+    transition: 0.25s;
+}
+
+.nav-btn.active { color: var(--gold); border-bottom: 2px solid var(--gold); font-weight: 600; }
+
+/* --- SECTIONS (TABS) --- */
+.section { display: none; padding: 60px 5%; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.5s; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.section-title { text-align: center; font-size: 2.5rem; margin-bottom: 10px; color: var(--gold); }
+.section-sub { text-align: center; margin-bottom: 40px; color: #888; }
+
+/* --- SERVICE CARDS (ACCORDION) --- */
+.service-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.service-img { height: 200px; width: 100%; object-fit: cover; }
+.service-info { padding: 25px; }
+
+.service-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.service-name { font-size: 1.4rem; font-weight: 600; }
+.service-price { color: var(--gold); font-weight: 700; font-size: 1.2rem; }
+
+.service-toggle { color: #999; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+.service-desc {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    color: #555;
+    line-height: 1.6;
+}
+
+.service-card.open .service-desc {
+    max-height: 300px; /* Достаточно места для текста */
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.chevron { transition: transform 0.3s; }
+.service-card.open .chevron { transform: rotate(180deg); }
+
+
+/* --- CONTACT PAGE STYLES --- */
+.page-header {
+    background: #111;
+    color: #fff;
+    padding: 140px 5% 80px;
+    text-align: center;
+}
+.page-header h1 { font-size: 3.5rem; color: var(--gold); margin-bottom: 15px; }
+.page-header p { color: #ccc; max-width: 600px; margin: 0 auto; }
+
+.contact-section { padding: 80px 5%; background: var(--bg-body); }
+.contact-container { max-width: 1200px; margin: 0 auto; display: flex; gap: 60px; flex-wrap: wrap; }
+.contact-info { flex: 1; min-width: 300px; }
+.contact-form-wrapper { flex: 1.5; min-width: 320px; background: #fff; padding: 40px; border-radius: 8px; box-shadow: var(--shadow); }
+
+.info-item { display: flex; gap: 20px; margin-bottom: 30px; }
+.info-item i { font-size: 1.5rem; color: var(--gold); margin-top: 5px; }
+.info-item h4 { font-family: 'Cormorant Garamond'; font-size: 1.3rem; margin-bottom: 5px; }
+.info-item p, .info-item a { color: #555; line-height: 1.6; }
+
+/* Form */
+.form-group { margin-bottom: 25px; }
+.form-group label { display: block; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; color: #333; }
+.contact-form input, .contact-form select, .contact-form textarea {
+    width: 100%; padding: 12px 0; border: none; border-bottom: 1px solid #ddd;
+    background: transparent; font-family: 'Montserrat'; font-size: 1rem; outline: none; transition: 0.3s;
+}
+.contact-form input:focus, .contact-form textarea:focus { border-bottom: 1px solid var(--gold); }
+
+/* --- LUXURY FOOTER --- */
+.luxury-footer {
+    background-color: #111;
+    color: #fff;
+    padding-top: 80px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.footer-col { flex: 1; text-align: center; min-width: 250px; }
+
+.footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.footer-tagline { color: #aaa; font-size: 0.95rem; line-height: 1.6; max-width: 280px; margin: 0 auto; }
+.footer-col h3 { font-family: 'Cormorant Garamond'; font-size: 1.4rem; margin-bottom: 25px; color: #fff; }
+
+.contact-details p { color: #aaa; margin-bottom: 10px; line-height: 1.6; }
+.contact-details a { color: #aaa; transition: 0.3s; }
+.contact-details a:hover { color: var(--gold); }
+
+/* Social Icons (Instagram Big) */
+.social-icons.center-flex { display: flex; justify-content: center; width: 100%; }
+.insta-big {
+    display: flex; align-items: center; justify-content: center;
+    width: 85px; height: 85px; font-size: 3rem;
+    border: 1px solid #333; border-radius: 50%; color: #fff;
+    transition: all 0.3s ease;
+}
+.insta-big:hover {
+    border-color: var(--gold); color: var(--gold);
+    transform: scale(1.1); box-shadow: 0 0 20px rgba(184, 138, 68, 0.4);
+}
+
+.footer-bottom { border-top: 1px solid #222; padding: 25px; text-align: center; font-size: 0.8rem; color: #555; }
+
+/* --- FAB (Floating Button) --- */
+.fab {
+    position: fixed; bottom: 30px; right: 20px;
+    background: var(--gold); color: #fff;
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 1.5rem; box-shadow: 0 5px 20px rgba(184, 138, 68, 0.4);
+    z-index: 990; transition: 0.3s;
+}
+.fab:hover { transform: translateY(-5px); }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .hero-new h1 { font-size: 44px; }
+    .hero-actions { flex-direction: column; }
+    .about-container { flex-direction: column-reverse; }
+    .contact-container { flex-direction: column; }
+    .footer-container { flex-direction: column; align-items: center; gap: 60px; }
+    .nav-scroller { justify-content: flex-start; padding-left: 20px; overflow-x: auto; }
+}
+
+/* --- NEW SERVICES GRID DESIGN (4 Cards per Row) --- */
+
+/* Навигация категорий */
+.services-nav-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Добавил перенос на случай узких экранов */
+    gap: 15px;
+    padding: 20px 0;
+    margin-bottom: 50px;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.service-anchor {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: #1c1c1c;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 0;
+    transition: all 0.3s;
+    white-space: nowrap; /* Чтобы текст не переносился внутри кнопки */
+}
+
+.service-anchor:hover {
+    background: var(--text-dark);
+    color: #fff;
+    border-color: var(--text-dark);
+}
+
+/* Блоки категорий */
+.category-block {
+    /* Увеличили ширину контейнера, чтобы 4 карточки смотрелись свободно */
+    max-width: 1400px; 
+    margin: 0 auto 100px;
+    padding: 0 20px;
+    scroll-margin-top: 100px;
+}
+
+.block-title {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    color: var(--text-dark);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* СЕТКА (GRID) - ГЛАВНОЕ ИЗМЕНЕНИЕ */
+.grid-container {
+    display: grid;
+    /* Было minmax(300px, ...). 
+       Стало minmax(260px, ...). 
+       Мы разрешили карточкам быть уже, чтобы их поместилось 4 в ряд на десктопе.
+       На мобильных они всё равно перестроятся в 1-2 колонки.
+    */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px; /* Чуть уменьшил зазор для плотности */
+}
+
+/* КАРТОЧКА УСЛУГИ */
+.card {
+    background: #fff;
+    border: 1px solid #eee;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Карточки будут одинаковой высоты */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Картинка внутри карточки */
+.card-image {
+    height: 220px; /* Чуть уменьшил высоту картинки для баланса */
+    overflow: hidden;
+    background: #f4f4f4;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+/* Текст карточки */
+.card-content {
+    padding: 20px; /* Чуть меньше отступы внутри */
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; /* Чуть меньше шрифт заголовка */
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    line-height: 1.2;
+}
+
+.price {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Цены на коррекцию (мелкий текст) */
+.sub-prices {
+    list-style: none;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.sub-prices li {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+/* Кнопка "Book Now" внизу карточки */
+.book-btn {
+    margin-top: auto;
+    display: inline-block;
+    padding: 10px 25px;
+    border: 1px solid var(--text-dark);
+    color: var(--text-dark);
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.book-btn:hover {
+    background: var(--text-dark);
+    color: #fff;
+}
+
+/* --- CONTACT FORM BUTTON STYLE --- */
+
+.submit-btn {
+    display: inline-block;
+    width: 100%; /* Кнопка во всю ширину формы (выглядит солидно) */
+    padding: 18px 30px;
+    background-color: var(--text-dark); /* Темный фон #1C1C1C */
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px; /* Расстояние между буквами */
+    border: 1px solid var(--text-dark);
+    cursor: pointer;
+    transition: all 0.4s ease; /* Плавная анимация */
+    margin-top: 20px;
+}
+
+/* Эффект при наведении */
+.submit-btn:hover {
+    background-color: var(--gold); /* Меняем цвет на золотой */
+    border-color: var(--gold);
+    color: #fff;
+    transform: translateY(-3px); /* Кнопка чуть "взлетает" */
+    box-shadow: 0 10px 20px rgba(184, 138, 68, 0.2); /* Золотистая тень */
+}
+
+/* Эффект при нажатии */
+.submit-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(184, 138, 68, 0.2);
+}
+
+
+/* --- ABOUT PAGE STYLES --- */
+
+.about-section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-container {
+    display: flex;
+    align-items: center; /* Центрируем текст по вертикали относительно фото */
+    gap: 60px; /* Большой отступ между фото и текстом */
+}
+
+/* Фото мастера */
+.about-image {
+    flex: 1; /* Занимает половину ширины */
+    position: relative;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 2px;
+    box-shadow: 20px 20px 0px rgba(184, 138, 68, 0.15); /* Золотая подложка-тень */
+}
+
+/* Текст мастера */
+.about-text {
+    flex: 1; /* Занимает вторую половину */
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+.section-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.about-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Красивая подпись (имя) */
+.signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    margin: 30px 0 40px;
+    font-style: italic;
+}
+
+/* Секция Ценностей (Иконки) */
+.values-section {
+    background-color: #f9f9f9; /* Легкий серый фон */
+    padding: 80px 20px;
+    margin-top: 50px;
+}
+
+.values-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    text-align: center;
+}
+
+.value-item i {
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+}
+
+.value-item h3 {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.value-item p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* АДАПТИВНОСТЬ (Для телефонов) */
+@media (max-width: 900px) {
+    .about-container {
+        flex-direction: column; /* Картинка сверху, текст снизу */
+        gap: 40px;
+    }
+    
+    .about-image img {
+        box-shadow: 10px 10px 0px rgba(184, 138, 68, 0.15); /* Тень поменьше */
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+}
+
+
