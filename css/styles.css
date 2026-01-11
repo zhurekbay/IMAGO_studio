@@ -353,7 +353,10 @@ a { text-decoration: none; }
 .contact-container { max-width: 1200px; margin: 0 auto; display: flex; gap: 60px; flex-wrap: wrap; }
 .contact-info { flex: 1; min-width: 300px; }
 .contact-form-wrapper { flex: 1.5; min-width: 320px; background: #fff; padding: 40px; border-radius: 8px; box-shadow: var(--shadow); }
-
+.contact-desc {
+    margin-bottom: 40px; /* Отступ от текста до иконок (Location, Phone...) */
+    line-height: 1.6;    /* Немного увеличить высоту строк для красоты */
+}
 .info-item { display: flex; gap: 20px; margin-bottom: 30px; }
 .info-item i { font-size: 1.5rem; color: var(--gold); margin-top: 5px; }
 .info-item h4 { font-family: 'Cormorant Garamond'; font-size: 1.3rem; margin-bottom: 5px; }
